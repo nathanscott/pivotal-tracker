@@ -2,15 +2,16 @@ module PivotalTracker
   class Task
     include HappyMapper
 
+    attr_accessor :project_id, :story_id
+
     class << self
       def all(story, options={})
+        puts "/projects/#{story.project_id}/stories/#{story.id}/tasks"
         tasks = parse(Client.connection["/projects/#{story.project_id}/stories/#{story.id}/tasks"].get)
         tasks.each { |t| t.project_id, t.story_id = story.project_id, story.id }
         return tasks
       end
     end
-
-    attr_accessor :project_id, :story_id
 
     element :id, Integer
     element :description, String

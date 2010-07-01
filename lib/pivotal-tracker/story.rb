@@ -14,8 +14,10 @@ module PivotalTracker
     attr_accessor :project_id
 
     element :id, Integer
+    element :project_id, Integer
     element :url, String    
     element :created_at, DateTime
+    element :updated_at, DateTime
     element :accepted_at, DateTime
 
     element :name, String
@@ -79,6 +81,7 @@ module PivotalTracker
             xml.other_id "#{other_id}"
           }
         end
+        builder.to_xml
         return builder.to_xml
       end
 

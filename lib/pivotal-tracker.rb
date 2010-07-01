@@ -30,7 +30,7 @@ module PivotalTracker
     filters = []
     options.each do |key, value|
       values = value.is_a?(Array) ? value.map {|x| CGI.escape(x) }.join(',') : CGI.escape(value)
-      filters << "#{key}%3A#{values}" # %3A => :
+      filters << "#{key}%3A%22#{values}%22" # %3A => :
     end
     options_string << "filter=#{filters.join('%20')}" unless filters.empty? # %20 => &amp;
 
